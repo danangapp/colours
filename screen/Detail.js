@@ -111,14 +111,14 @@ export default class HelloWorldApp extends Component {
 
   header() {
     return (
-      <View style={{ padding: 20, backgroundColor: 'white' }}>
+      <View style={{ padding: 10, backgroundColor: 'white' }}>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity onPress={() => {
             this.props.navigation.goBack();
           }}>
             <Image source={require('./assets/back.png')} style={{ width: 20, height: 20 }} />
           </TouchableOpacity>
-          <Text style={{ marginLeft: 10, fontSize: 15 }}>Detail</Text>
+          <Text style={{ marginLeft: 10, fontSize: 15 }}>Back</Text>
         </View>
       </View>
     );
@@ -146,7 +146,7 @@ export default class HelloWorldApp extends Component {
 
     return (
       <ImageBackground style={{ width: '100%', flex: 1 }} source={bck}>
-        {Platform.OS === 'android' ? null : this.header()}
+        {Platform.OS === 'ios' ? null : this.header()}
         {this.state.isDisplay == 'none' ? (
           <View style={{ top: height / 2.2, zIndex: 1 }}>
             <ActivityIndicator size="large" color="#ffffff" />

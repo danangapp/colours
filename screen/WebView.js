@@ -6,14 +6,14 @@ class MyWeb extends Component {
 
   header() {
     return (
-      <View style={{ padding: 20, backgroundColor: 'white' }}>
+      <View style={{ padding: 10, backgroundColor: 'white' }}>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity onPress={() => {
             this.props.navigation.goBack();
           }}>
             <Image source={require('./assets/back.png')} style={{ width: 20, height: 20 }} />
           </TouchableOpacity>
-          <Text style={{ marginLeft: 10, fontSize: 15 }}>Garuda Colours</Text>
+          <Text style={{ marginLeft: 10, fontSize: 15 }}>Back</Text>
         </View>
       </View>
     );
