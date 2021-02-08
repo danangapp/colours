@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import styles from './styles';
 var width = Dimensions.get('window').width;
@@ -31,6 +32,7 @@ export default class HelloWorldApp extends Component {
       TopDesc: '',
       TopUrl: '',
       isDisplay: 'flex',
+      displayHeader: 'none',
     };
   }
 
@@ -107,6 +109,21 @@ export default class HelloWorldApp extends Component {
       });
   }
 
+  header() {
+    return (
+      <View style={{ padding: 20, backgroundColor: 'white' }}>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity onPress={() => {
+            this.props.navigation.goBack();
+          }}>
+            <Image source={require('./assets/back.png')} style={{ width: 20, height: 20 }} />
+          </TouchableOpacity>
+          <Text style={{ marginLeft: 10, fontSize: 15 }}>Detail</Text>
+        </View>
+      </View>
+    );
+  }
+
   render() {
     var contents;
     {
@@ -129,6 +146,7 @@ export default class HelloWorldApp extends Component {
 
     return (
       <ImageBackground style={{ width: '100%', flex: 1 }} source={bck}>
+        {Platform.OS === 'android' ? null : this.header()}
         {this.state.isDisplay == 'none' ? (
           <View style={{ top: height / 2.2, zIndex: 1 }}>
             <ActivityIndicator size="large" color="#ffffff" />

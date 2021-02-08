@@ -5,7 +5,6 @@ import {
   View,
   Image,
   Dimensions,
-  FlatList,
   ScrollView,
   TouchableOpacity,
   ImageBackground,
