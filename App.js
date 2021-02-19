@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from './screen/Home';
+// import Home from './screen/Home';
 import Detail from './screen/Detail';
 import WebView from './screen/WebView';
 import QR from './screen/QR';
@@ -17,7 +17,7 @@ export default class App extends Component {
   MyDrawer() {
     return (
       <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Detail" component={Detail} />
       </Drawer.Navigator >
     );
   }
@@ -29,9 +29,9 @@ export default class App extends Component {
           screenOptions={{
             headerShown: false,
           }}
-          initialRouteName="Home">
+          initialRouteName="Detail">
           <Stack.Screen name="Drawer" component={this.MyDrawer} />
-          <Stack.Screen name="Home" component={Home} />
+          {/* <Stack.Screen name="Home" component={Home} /> */}
           <Stack.Screen name="Detail" component={Detail} />
           <Stack.Screen name="WebView" component={WebView} />
           <Stack.Screen name="QR" component={QR} />

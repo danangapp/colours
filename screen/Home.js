@@ -52,7 +52,7 @@ export default class HelloWorldApp extends Component {
     this.setState({ isDisplay: 'flex', data: data, displaySplahScreen: 'flex' });
     setTimeout(() => {
       this.setState({ displaySplahScreen: 'none' });
-    }, 2000);
+    }, 6000);
   }
 
   componentDidMount() {
@@ -123,9 +123,9 @@ export default class HelloWorldApp extends Component {
 
   splashScreen() {
     return (
-      <View style={{ display: this.state.displaySplahScreen, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ display: this.state.displaySplahScreen, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0F1624' }}>
         <View style={{ padding: 100 }}>
-          <Image source={require('./assets/welcome.jpg')} style={{ width, height: width, resizeMode: 'cover' }} />
+          <Image source={require('./assets/welcome.gif')} style={{ width, height: width, resizeMode: 'cover' }} />
         </View>
       </View>
     );
