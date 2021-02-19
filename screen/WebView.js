@@ -44,7 +44,14 @@ class MyWeb extends Component {
     const { linkTo } = this.props.route.params;
     var { show } = this.state;
     return (
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={(event) => {
+        var { x, y, width, height } = event.nativeEvent.layout;
+        if (width > height) {
+          if (show === 1) {
+            this.setState({ show: 0 });
+          }
+        }
+      }}>
         {/* {Platform.OS === 'android' ? null : this.header()} */}
         {show === 1 ? this.header() : null}
         <TouchableWithoutFeedback style={{ flex: 1 }} onPress={() => {
