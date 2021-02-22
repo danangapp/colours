@@ -82,11 +82,11 @@ export default class HelloWorldApp extends Component {
   componentDidMount() {
     StatusBar.setHidden(true);
     this.getData();
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    // BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    // BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
   }
 
   handleBackButtonClick() {
@@ -175,7 +175,7 @@ export default class HelloWorldApp extends Component {
 
     return (
       <ImageBackground style={{ width: '100%', flex: 1 }} source={bck}>
-        {Platform.OS === 'android' ? null : this.header()}
+        {/* {Platform.OS === 'android' ? null : this.header()} */}
         {this.state.isDisplay === 'none' ? (
           <View style={{ top: height / 2.2, zIndex: 1 }}>
             <ActivityIndicator size="large" color="#ffffff" />

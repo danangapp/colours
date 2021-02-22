@@ -52,8 +52,8 @@ class MyWeb extends Component {
           }
         }
       }}>
-        {/* {Platform.OS === 'android' ? null : this.header()} */}
-        {show === 1 ? this.header() : null}
+        {Platform.OS === 'android' ? null : show === 1 ? this.header() : null}
+        {/* {show === 1 ? this.header() : null} */}
         <TouchableWithoutFeedback style={{ flex: 1 }} onPress={() => {
           this.backCount++;
           if (this.backCount === 2) {
