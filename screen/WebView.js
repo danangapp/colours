@@ -9,21 +9,45 @@ class MyWeb extends Component {
     this.backCount = 0;
     this.state = {
       show: 0,
+      url: '',
     };
+    this.webview = React.createRef();
   }
-  // componentDidMount() {
-  //   BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-  // }
 
-  // componentWillUnmount() {
-  //   BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-  // }
+  componentDidMount() {
+    if (Platform.OS === 'android') {
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+  }
 
-  handleBackButtonClick() {
-    console.log(this.webview);
+  componentWillUnmount() {
+    if (Platform.OS === 'android') {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+  }
+
+
+  handleBackButton = () => {
+    var urlHome = 'https://versoview.com/openview/airlines/garuda-indonesia/colours/';
+    const { url } = this.state;
+    if (url === urlHome) {
+      this.props.navigation.goBack();
+    } else {
+      const redirectTo = 'window.location = "' + urlHome + '"';
+      this.webview.current.injectJavaScript(redirectTo);
+    }
+    // this.webview.current.goBack();
     return true;
   }
 
+  onNavigationStateChange(navState) {
+    if (navState.url === 'https://versoview.com/') {
+      this.props.navigation.goBack();
+    }
+    this.setState({
+      url: navState.url,
+    });
+  }
 
   header() {
     return (
@@ -41,8 +65,21 @@ class MyWeb extends Component {
   }
 
   render() {
+    // console.log(this.state.url);
     const { linkTo } = this.props.route.params;
     var { show } = this.state;
+    const html = `
+      <html>
+      <head></head>
+      <body>
+        <script>
+          setTimeout(function () {
+            window.ReactNativeWebView.postMessage("Hello!")
+          }, 2000)
+        </script>
+      </body>
+      </html>
+    `;
     return (
       <View style={styles.container} onLayout={(event) => {
         var { x, y, width, height } = event.nativeEvent.layout;
@@ -68,7 +105,11 @@ class MyWeb extends Component {
         }}>
           <WebView
             source={{ uri: linkTo }}
-            ref={(r) => (this.webview = r)}
+            ref={this.webview}
+            onNavigationStateChange={this.onNavigationStateChange.bind(this)}
+            onMessage={(event) => {
+              alert(event.nativeEvent.data);
+            }}
           />
         </TouchableWithoutFeedback>
       </View>
