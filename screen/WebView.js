@@ -54,7 +54,7 @@ class MyWeb extends Component {
 
   onNavigationStateChange(navState) {
     if (navState.url === 'https://versoview.com/') {
-      this.props.navigation.goBack();
+      this.props.navigation.goBack(null);
     }
     this.setState({
       url: navState.url,
