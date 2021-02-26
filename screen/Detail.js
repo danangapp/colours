@@ -130,16 +130,17 @@ export default class HelloWorldApp extends Component {
 
   header() {
     return (
-      <View style={{ padding: 10, backgroundColor: '#222D5E' }}>
-        <View style={{ flexDirection: 'row' }}>
+      <View style={{ padding: 20, backgroundColor: '#222D5E' }}>
+        <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
+          <Image source={require('./assets/logo-clr.png')} ImageResizeMode="contain" style={{ width: 95, height: 25, marginLeft: -10 }} />
           <TouchableOpacity onPress={() => {
             this.props.navigation.goBack();
           }}>
-            <Image source={require('./assets/back.png')} style={{ width: 20, height: 20 }} />
+            <Image source={require('./assets/back-yellow.png')} style={{ width: 25, height: 25, marginRight: -5 }} />
           </TouchableOpacity>
-          <Text style={{ marginLeft: 10, fontSize: 15 }}>Back</Text>
+          {/* <Text style={{ marginLeft: 10, fontSize: 15 }}>Back</Text> */}
         </View>
-      </View>
+      </View >
     );
   }
 
