@@ -29,7 +29,7 @@ class MyWeb extends Component {
 
 
   handleBackButton = () => {
-    var urlHome = 'https://versoview.com/openview/airlines/garuda-indonesia/colours/';
+    var urlHome = 'https://versoview.com/openview/airlines/garuda-indonesia/ecolours/';
     const { url } = this.state;
     if (url === urlHome) {
       this.props.navigation.goBack();

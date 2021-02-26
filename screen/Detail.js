@@ -58,9 +58,9 @@ export default class HelloWorldApp extends Component {
 
     const data = [
       {
-        Page: 'https://versoview.com/openview/airlines/garuda-indonesia/colours/files/medium/1.jpg',
+        Page: 'https://versoview.com/openview/airlines/garuda-indonesia/ecolours/files/medium/1.jpg',
         Title: 'Garuda Indonesia Colours',
-        Url: 'https://versoview.com/openview/airlines/garuda-indonesia/colours/',
+        Url: 'https://versoview.com/openview/airlines/garuda-indonesia/ecolours/',
         Detail:
           "Welcome to Colours December 2019 - Selamat Datang di Colours December 2019, Travel : Jeddah, Nias, Rome. The Archipelago : Jayapura, Masterclass : Interior Photography : The World Most Beautiful Libraries. Travel Trends, What's On, Style, Trending. Flavours : Culinary delights from across the archipelago. \r\nInterview : Rinaldy A. Yunardi. Ga Kids : Togean Islands National Park\r\n\r\n \r\n*Designed & Published in Indonesia by Agency Fish*",
       },
@@ -215,7 +215,7 @@ export default class HelloWorldApp extends Component {
                 </Text>
               </View>
             </View>
-            <View
+            {/* <View
               style={{
                 alignItems: 'center',
                 flex: 1,
@@ -225,7 +225,7 @@ export default class HelloWorldApp extends Component {
                 justifyContent: 'center',
               }}>
               {contents}
-            </View>
+            </View> */}
           </View>
         </ScrollView>
         <View style={styles.footer}>
