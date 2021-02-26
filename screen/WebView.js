@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity, TouchableWithoutFeedback, Text, Platform, BackHandler } from 'react-native';
@@ -32,9 +33,20 @@ class MyWeb extends Component {
     const { url } = this.state;
     if (url === urlHome) {
       this.props.navigation.goBack();
-    } else {
-      const redirectTo = 'window.location = "' + urlHome + '"';
-      this.webview.current.injectJavaScript(redirectTo);
+    }
+    else {
+      var str = this.state.url;
+      var arr = str.split('#');
+      var str2 = arr[0].split('/');
+      var page = str2[str2.length - 1];
+      var action = '';
+      if (page === 'index.html') {
+        action = 'window.location = "' + urlHome + '"';
+      } else {
+        action = '$(".ov-back").click()';
+      }
+
+      this.webview.current.injectJavaScript(action);
     }
     // this.webview.current.goBack();
     return true;
@@ -47,6 +59,9 @@ class MyWeb extends Component {
     this.setState({
       url: navState.url,
     });
+
+    // console.log(navState.url);
+    this.setState({ back: 0 });
   }
 
   header() {
@@ -65,7 +80,6 @@ class MyWeb extends Component {
   }
 
   render() {
-    // console.log(this.state.url);
     const { linkTo } = this.props.route.params;
     var { show } = this.state;
     const html = `
