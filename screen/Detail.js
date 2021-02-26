@@ -210,7 +210,7 @@ export default class HelloWorldApp extends Component {
 
               <View style={styles.viewTitle}>
                 <Text style={styles.textTitle}> {this.state.TopTitle} </Text>
-                <Text style={{ textAlign: 'justify', color: 'white' }}>
+                <Text style={{ color: 'white' }}>
                   {this.state.TopDesc}
                 </Text>
               </View>

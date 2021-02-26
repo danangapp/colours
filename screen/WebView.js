@@ -40,7 +40,10 @@ class MyWeb extends Component {
       var str2 = arr[0].split('/');
       var page = str2[str2.length - 1];
       var action = '';
+      console.log(page);
       if (page === 'index.html') {
+        action = 'window.location = "' + urlHome + '"';
+      } else if (page === '') {
         action = 'window.location = "' + urlHome + '"';
       } else {
         action = '$(".ov-back").click()';
