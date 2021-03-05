@@ -83,7 +83,6 @@ export default class HelloWorldApp extends Component {
   }
 
   componentDidMount() {
-    this.getDetail();
     StatusBar.setHidden(true);
     this.getData();
   }
