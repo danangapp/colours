@@ -1,4 +1,4 @@
-package com.colours;
+package com.versoview.ecolours;
 
 import com.facebook.react.ReactActivity;
 

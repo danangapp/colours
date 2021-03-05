@@ -7,7 +7,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 // import Home from './screen/Home';
 import Detail from './screen/Detail';
 import WebView from './screen/WebView';
-import QR from './screen/QR';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -34,7 +33,6 @@ export default class App extends Component {
           {/* <Stack.Screen name="Home" component={Home} /> */}
           <Stack.Screen name="Detail" component={Detail} />
           <Stack.Screen name="WebView" component={WebView} />
-          <Stack.Screen name="QR" component={QR} />
         </Stack.Navigator>
       </NavigationContainer>
     );

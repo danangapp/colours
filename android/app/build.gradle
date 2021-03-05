@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.colours"
+        applicationId 'com.versoview.ecolours'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         missingDimensionStrategy 'react-native-camera', 'general'

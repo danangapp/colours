@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react/no-string-refs */
 /* eslint-disable comma-dangle */
 /* eslint-disable react-native/no-inline-styles */
@@ -23,6 +24,7 @@ import styles from './styles';
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 const bck = require('./assets/bg.png');
+const f = require('../screen/Function');
 
 export default class HelloWorldApp extends Component {
   constructor(props) {
@@ -42,37 +44,38 @@ export default class HelloWorldApp extends Component {
     this.backClick = 0;
   }
 
-  getData(forBack = 0) {
-    this.setState({ isDisplay: 'none' });
-    fetch('https://agencyfish.com/app/colours.php', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ data: data, isDisplay: 'flex' });
-      });
+  async getDemo() {
+    const response = await fetch('https://panel.versoview.com/mobile/demo');
+    var data = response.json();
+    return data;
+  }
 
-    const data = [
-      {
-        Page: 'https://versoview.com/openview/airlines/garuda-indonesia/ecolours/files/medium/1.jpg',
-        Title: 'Garuda Indonesia Colours',
-        Url: 'https://versoview.com/openview/airlines/garuda-indonesia/ecolours/',
-        Detail:
-          "Welcome to Colours December 2019 - Selamat Datang di Colours December 2019, Travel : Jeddah, Nias, Rome. The Archipelago : Jayapura, Masterclass : Interior Photography : The World Most Beautiful Libraries. Travel Trends, What's On, Style, Trending. Flavours : Culinary delights from across the archipelago. \r\nInterview : Rinaldy A. Yunardi. Ga Kids : Togean Islands National Park\r\n\r\n \r\n*Designed & Published in Indonesia by Agency Fish*",
-      },
-    ];
+  async getDetail() {
+    const response = await fetch('https://panel.versoview.com/mobile/magazine');
+    var data = response.json();
+    return data;
+  }
+
+  async getData(forBack = 0) {
+    const dt = await this.getDetail();
+    const data = dt[0];
+    var dataDetail = [];
+    for (var a in dt) {
+      if (a != 0) {
+        dataDetail.push(dt[a]);
+      }
+    }
+
     this.setState({
-      TopImage: data[0].Page,
-      TopTitle: data[0].Title,
-      TopDesc: data[0].Detail,
-      TopUrl: data[0].Url
+      TopImage: data.url + 'files/medium/1.jpg',
+      TopTitle: data.title,
+      TopDesc: data.detail,
+      TopUrl: data.url,
+      isDisplay: 'flex',
+      data: dataDetail
     });
     if (forBack === 0) {
-      this.setState({ displaySplahScreen: 'flex' })
+      this.setState({ displaySplahScreen: 'flex' });
       setTimeout(() => {
         this.setState({ displaySplahScreen: 'none' });
       }, 6000);
@@ -80,13 +83,9 @@ export default class HelloWorldApp extends Component {
   }
 
   componentDidMount() {
+    this.getDetail();
     StatusBar.setHidden(true);
     this.getData();
-    // BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-
-  componentWillUnmount() {
-    // BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
   }
 
   handleBackButtonClick() {
@@ -105,27 +104,30 @@ export default class HelloWorldApp extends Component {
     return true;
   }
 
-  getParam(id) {
+  async getParam(id) {
     this.setState({ isDisplay: 'none'/* , displaySplahScreen: 'flex' */ });
-    fetch('https://agencyfish.com/app/colours.php?Page=' + id, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          TopImage: data[0].Page, TopTitle: data[0].Title,
-          TopDesc: data[0].Detail,
-          TopUrl: data[0].Url,
-          isDisplay: 'flex',
-          displaySplahScreen: 'none'
-        });
-        const { _scrollView } = this.refs;
-        _scrollView.scrollTo({ y: 0 });
-      });
+    const dt = await this.getDetail();
+    var data;
+    var dataDetail = [];
+    for (var a in dt) {
+      if (dt[a].id != id) {
+        dataDetail.push(dt[a]);
+      } else {
+        data = dt[a];
+      }
+    }
+
+    this.setState({
+      data: dataDetail,
+      TopImage: data.url + 'files/medium/1.jpg',
+      TopTitle: data.title,
+      TopDesc: data.detail,
+      TopUrl: data.url,
+      isDisplay: 'flex',
+      displaySplahScreen: 'none'
+    });
+    const { _scrollView } = this.refs;
+    _scrollView.scrollTo({ y: 0 });
   }
 
   header() {
@@ -155,9 +157,12 @@ export default class HelloWorldApp extends Component {
   }
 
   renderContent() {
+    const { data } = this.state;
+
     var contents;
     {
-      contents = this.state.data.map((item, index) => {
+      contents = data.map((item, index) => {
+        const thumb = item.url + 'files/medium/1.jpg';
         return (
           <TouchableOpacity
             onPress={() => this.getParam(item.id)}
@@ -166,9 +171,9 @@ export default class HelloWorldApp extends Component {
             <Image
               style={styles.image}
               resizeMode={'stretch'}
-              source={{ uri: item.Thumb }}
+              source={{ uri: thumb }}
             />
-            <Text style={styles.textImage}> {item.Title} </Text>
+            <Text style={styles.textImage}> {item.title} </Text>
           </TouchableOpacity>
         );
       });
@@ -215,17 +220,16 @@ export default class HelloWorldApp extends Component {
                 </Text>
               </View>
             </View>
-            {/* <View
+            <View
               style={{
                 alignItems: 'center',
                 flex: 1,
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 marginBottom: 50,
-                justifyContent: 'center',
               }}>
               {contents}
-            </View> */}
+            </View>
           </View>
         </ScrollView>
         <View style={styles.footer}>

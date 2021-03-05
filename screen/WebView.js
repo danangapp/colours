@@ -29,8 +29,9 @@ class MyWeb extends Component {
 
 
   handleBackButton = () => {
-    var urlHome = 'https://versoview.com/openview/airlines/garuda-indonesia/ecolours/';
+    var urlHome = this.props.route.params.linkTo;
     const { url } = this.state;
+    // console.log(url, urlHome);
     if (url === urlHome) {
       this.props.navigation.goBack();
     }
@@ -40,14 +41,15 @@ class MyWeb extends Component {
       var str2 = arr[0].split('/');
       var page = str2[str2.length - 1];
       var action = '';
-      console.log(page);
+
       if (page === 'index.html') {
-        action = 'window.location = "' + urlHome + '"';
+        this.props.navigation.goBack();
       } else if (page === '') {
-        action = 'window.location = "' + urlHome + '"';
+        this.props.navigation.goBack();
       } else {
         action = '$(".ov-back").click()';
       }
+      action = '$(".ov-back").click()';
 
       this.webview.current.injectJavaScript(action);
     }
@@ -97,6 +99,8 @@ class MyWeb extends Component {
       </body>
       </html>
     `;
+
+    const jsCode = 'show_backbutton();';
     return (
       <View style={styles.container} onLayout={(event) => {
         var { x, y, width, height } = event.nativeEvent.layout;
@@ -124,9 +128,11 @@ class MyWeb extends Component {
             source={{ uri: linkTo }}
             ref={this.webview}
             onNavigationStateChange={this.onNavigationStateChange.bind(this)}
-            onMessage={(event) => {
-              alert(event.nativeEvent.data);
-            }}
+            javaScriptEnabledAndroid={true}
+            injectedJavaScript={jsCode}
+          // onMessage={(event) => {
+          //   alert(event.nativeEvent.data);
+          // }}
           />
         </TouchableWithoutFeedback>
       </View>
