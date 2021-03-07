@@ -67,7 +67,7 @@ export default class HelloWorldApp extends Component {
     }
 
     this.setState({
-      TopImage: data.url + 'files/medium/1.jpg',
+      TopImage: data.image,
       TopTitle: data.title,
       TopDesc: data.detail,
       TopUrl: data.url,
@@ -118,7 +118,7 @@ export default class HelloWorldApp extends Component {
 
     this.setState({
       data: dataDetail,
-      TopImage: data.url + 'files/medium/1.jpg',
+      TopImage: data.image,
       TopTitle: data.title,
       TopDesc: data.detail,
       TopUrl: data.url,
@@ -161,7 +161,7 @@ export default class HelloWorldApp extends Component {
     var contents;
     {
       contents = data.map((item, index) => {
-        const thumb = item.url + 'files/medium/1.jpg';
+        const thumb = item.image;
         return (
           <TouchableOpacity
             onPress={() => this.getParam(item.id)}
