@@ -147,9 +147,9 @@ export default class HelloWorldApp extends Component {
 
   splashScreen() {
     return (
-      <View style={{ display: this.state.displaySplahScreen, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0F1624' }}>
+      <View style={{ display: this.state.displaySplahScreen, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0f1624' }}>
         <View style={{ padding: 100 }}>
-          <Image source={require('./assets/welcome.gif')} style={{ width, height: width, resizeMode: 'cover' }} />
+          <Image source={require('./assets/welcome.gif')} style={{ width: width * 0.60, height: width * 0.60, resizeMode: 'contain' }} />
         </View>
       </View>
     );
@@ -214,7 +214,7 @@ export default class HelloWorldApp extends Component {
 
               <View style={styles.viewTitle}>
                 <Text style={styles.textTitle}> {this.state.TopTitle} </Text>
-                <Text style={{ color: 'white' }}>
+                <Text style={styles.textDescription}>
                   {this.state.TopDesc}
                 </Text>
               </View>
