@@ -16,7 +16,6 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* coloursTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* coloursTests.m */; };
 		73EB4D292ED688D92B2C2E4D /* libPods-colours-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 619894E1B8A59A741A9EAF73 /* libPods-colours-tvOS.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9E2D543B7D01060E7196F1BD /* libPods-colours.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 201DAFCAB72805F2E202248B /* libPods-colours.a */; };
 		B35BCF0C9DEC2C1C63EF4912 /* libPods-colours-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D45A460DBB618683885BAD /* libPods-colours-tvOSTests.a */; };
 		F57AD540BC6A49574F5CE52C /* libPods-colours-coloursTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C6DE41DEC025D2F61DC48D /* libPods-colours-coloursTests.a */; };
@@ -46,7 +45,7 @@
 		00E356F21AD99517003FC87E /* coloursTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = coloursTests.m; sourceTree = "<group>"; };
 		075B809540232ADB673F007B /* Pods-colours.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-colours.release.xcconfig"; path = "Target Support Files/Pods-colours/Pods-colours.release.xcconfig"; sourceTree = "<group>"; };
 		0DE5E425ADF6CD9C31BAAED7 /* Pods-colours-coloursTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-colours-coloursTests.release.xcconfig"; path = "Target Support Files/Pods-colours-coloursTests/Pods-colours-coloursTests.release.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* colours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = colours.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* eColours Magazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eColours Magazine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = colours/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = colours/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = colours/Images.xcassets; sourceTree = "<group>"; };
@@ -58,7 +57,6 @@
 		2D02E4901E0B4A5D006451C7 /* colours-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "colours-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		465BFD229642FC2BF7969DE2 /* Pods-colours-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-colours-tvOS.release.xcconfig"; path = "Target Support Files/Pods-colours-tvOS/Pods-colours-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		619894E1B8A59A741A9EAF73 /* libPods-colours-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-colours-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = colours/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84C6DE41DEC025D2F61DC48D /* libPods-colours-coloursTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-colours-coloursTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F4D1C3CAFC15406AD777FF /* Pods-colours-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-colours-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-colours-tvOSTests/Pods-colours-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		BFBC72F2345EE05BE2A8B5FC /* Pods-colours-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-colours-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-colours-tvOS/Pods-colours-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = colours;
@@ -174,7 +171,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* colours.app */,
+				13B07F961A680F5B00A75B9A /* eColours Magazine.app */,
 				00E356EE1AD99517003FC87E /* coloursTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* colours-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* colours-tvOSTests.xctest */,
@@ -238,7 +235,7 @@
 			);
 			name = colours;
 			productName = colours;
-			productReference = 13B07F961A680F5B00A75B9A /* colours.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* eColours Magazine.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* colours-tvOS */ = {
@@ -340,7 +337,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -655,7 +651,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = 3748QNDY95;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = colours/Info.plist;
@@ -668,7 +664,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.versoview.colours;
-				PRODUCT_NAME = colours;
+				PRODUCT_NAME = "eColours Magazine";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -681,7 +677,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = 3748QNDY95;
 				INFOPLIST_FILE = colours/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -693,7 +689,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.versoview.colours;
-				PRODUCT_NAME = colours;
+				PRODUCT_NAME = "eColours Magazine";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

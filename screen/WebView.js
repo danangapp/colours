@@ -42,13 +42,13 @@ class MyWeb extends Component {
       var page = str2[str2.length - 1];
       var action = '';
 
-      if (page === 'index.html') {
-        this.props.navigation.goBack();
-      } else if (page === '') {
-        this.props.navigation.goBack();
-      } else {
-        action = '$(".ov-back").click()';
-      }
+      // if (page === 'index.html') {
+      //   this.props.navigation.goBack();
+      // } else if (page === '') {
+      //   this.props.navigation.goBack();
+      // } else {
+      //   action = '$(".ov-back").click()';
+      // }
       action = '$(".ov-back").click()';
 
       this.webview.current.injectJavaScript(action);
@@ -58,7 +58,9 @@ class MyWeb extends Component {
   }
 
   onNavigationStateChange(navState) {
-    if (navState.url === 'https://versoview.com/') {
+    var urlHome = this.props.route.params.linkTo;
+    // console.log(urlHome);
+    if (navState.url === urlHome + '#') {
       this.props.navigation.goBack(null);
     }
     this.setState({
@@ -130,6 +132,7 @@ class MyWeb extends Component {
             onNavigationStateChange={this.onNavigationStateChange.bind(this)}
             javaScriptEnabledAndroid={true}
             injectedJavaScript={jsCode}
+            style={{ backgroundColor: '#0F1624' }}
           // onMessage={(event) => {
           //   alert(event.nativeEvent.data);
           // }}
