@@ -60,7 +60,7 @@ class MyWeb extends Component {
   onNavigationStateChange(navState) {
     var urlHome = this.props.route.params.linkTo;
     // console.log(urlHome);
-    if (navState.url === urlHome + '#') {
+    if (navState.url === 'https://versoview.com/') {
       this.props.navigation.goBack(null);
     }
     this.setState({
