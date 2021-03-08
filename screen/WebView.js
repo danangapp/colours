@@ -42,14 +42,15 @@ class MyWeb extends Component {
       var page = str2[str2.length - 1];
       var action = '';
 
-      // if (page === 'index.html') {
-      //   this.props.navigation.goBack();
-      // } else if (page === '') {
-      //   this.props.navigation.goBack();
-      // } else {
-      //   action = '$(".ov-back").click()';
-      // }
-      action = '$(".ov-back").click()';
+      console.log(page);
+      if (page === 'index.html') {
+        this.props.navigation.goBack();
+      } else if (page === '') {
+        this.props.navigation.goBack();
+      } else {
+        action = '$(".ov-back").click()';
+      }
+      // action = '$(".ov-back").click()';
 
       this.webview.current.injectJavaScript(action);
     }
