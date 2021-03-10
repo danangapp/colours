@@ -24,7 +24,7 @@ import styles from './styles';
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 const bck = require('./assets/bg.png');
-const f = require('../screen/Function');
+import OneSignal from "./OneSignal";
 
 export default class HelloWorldApp extends Component {
   constructor(props) {
@@ -187,6 +187,7 @@ export default class HelloWorldApp extends Component {
           </View>
         ) : null}
         <ScrollView ref="_scrollView">
+          <OneSignal />
           <View style={styles.container}>
             <View
               style={{

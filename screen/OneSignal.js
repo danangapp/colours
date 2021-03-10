@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -6,184 +7,118 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, ScrollView, ActivityIndicator, KeyboardAvoidingView, TextInput, Image, Button, AsyncStorage} from 'react-native';
+import React, { Component } from 'react';
+import {
+    Platform,
+    StyleSheet,
+    View,
+} from 'react-native';
 import OneSignal from 'react-native-onesignal';
 
-const imageUri = 'https://cdn-images-1.medium.com/max/300/1*7xHdCFeYfD8zrIivMiQcCQ.png';
+const imageUri =
+    'https://cdn-images-1.medium.com/max/300/1*7xHdCFeYfD8zrIivMiQcCQ.png';
 
 export default class One extends Component {
-  constructor(properties) {
-      super(properties);
+    async componentDidMount() {
+        /* O N E S I G N A L   S E T U P */
+        OneSignal.setAppId("5b284a70-278f-440e-aa1a-a8b71518d60d");
+        OneSignal.setLogLevel(6, 0);
+        OneSignal.setRequiresUserPrivacyConsent(false);
+        // OneSignal.promptForPushNotificationsWithUserResponse(response => {
+        // this.OSLog("Prompt response:", response);
+        // });
 
-      OneSignal.setLogLevel(6, 0);
+        /* O N E S I G N A L  H A N D L E R S */
+        OneSignal.setNotificationWillShowInForegroundHandler(notifReceivedEvent => {
+            // this.OSLog("OneSignal: notification will show in foreground:", notifReceivedEvent);
+            let notif = notifReceivedEvent.getNotification();
 
-      let requiresConsent = false;
+            // const button1 = {
+            //     text: "Cancel",
+            //     onPress: () => { notifReceivedEvent.complete(); },
+            //     style: "cancel"
+            // };
 
-      this.state = {
-          emailEnabled: false,
-          animatingEmailButton : false,
-          initialOpenFromPush : "Did NOT open from push",
-          activityWidth : 0,
-          width: 0,
-          activityMargin: 0,
-          buttonColor : Platform.OS == "ios" ? "#ffffff" : "#d45653",
-          jsonDebugText : "",
-          privacyButtonTitle : "Privacy Consent: Not Granted",
-          requirePrivacyConsent : requiresConsent
-      };
+            // const button2 = { text: "Complete", onPress: () => { notifReceivedEvent.complete(notif); } };
 
-      OneSignal.setRequiresUserPrivacyConsent(requiresConsent);
+            // alert("Complete notification?", "Test", [button1, button2], { cancelable: true });
+            notifReceivedEvent.complete(notif);
+        });
+        OneSignal.setNotificationOpenedHandler(notification => {
+            this.OSLog("OneSignal: notification opened:", notification);
+        });
+        OneSignal.setInAppMessageClickHandler(event => {
+            this.OSLog("OneSignal IAM clicked:", event);
+        });
+        OneSignal.addEmailSubscriptionObserver((event) => {
+            this.OSLog("OneSignal: email subscription changed: ", event);
+        });
+        OneSignal.addSubscriptionObserver(event => {
+            this.OSLog("OneSignal: subscription changed:", event);
+            this.setState({ isSubscribed: event.to.isSubscribed })
+        });
+        OneSignal.addPermissionObserver(event => {
+            this.OSLog("OneSignal: permission changed:", event);
+        });
 
-      OneSignal.init("f24ed495-c26f-4435-98e3-52e4e71345bb", {kOSSettingsKeyAutoPrompt : true});
+        const deviceState = await OneSignal.getDeviceState();
 
-      this.oneSignalInAppMessagingExamples();
-  }
-
-  oneSignalInAppMessagingExamples() {
-      // Add a single trigger with a value associated with it
-      OneSignal.addTrigger("trigger_1", "one");
-      OneSignal.getTriggerValueForKey("trigger_1").then((response) => {
-          // console.log("trigger_1 value: " + response);
-      }).catch((e) => {
-          console.error(e);
-      });
-      OneSignal.removeTriggerForKey("trigger_1");
-
-      // Create a set of triggers in a map and add them all at once
-      var triggers = {
-          "trigger_2": "two",
-          "trigger_3": "three"
-      };
-      OneSignal.addTriggers(triggers);
-
-      // Create an array of keys to remove triggers for
-      var removeTriggers = ["trigger_2", "trigger_3"];
-      OneSignal.removeTriggersForKeys(removeTriggers);
-
-      // Toggle the showing of IAMs
-      OneSignal.pauseInAppMessages(false);
-  }
-
-  validateEmail(email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-  }
-
-  async componentDidMount() {
-      var providedConsent = await OneSignal.userProvidedPrivacyConsent();
-
-      this.setState({privacyButtonTitle : `Privacy Consent: ${providedConsent ? "Granted" : "Not Granted"}`, privacyGranted : providedConsent});
-
-      OneSignal.setLocationShared(true);
-     
-      OneSignal.inFocusDisplaying(2);
-
-      this.onReceived = this.onReceived.bind(this);
-      this.onOpened = this.onOpened.bind(this);
-      this.onIds = this.onIds.bind(this);
-      this.onEmailRegistrationChange = this.onEmailRegistrationChange.bind(this);
-      this.onInAppMessageClicked = this.onInAppMessageClicked.bind(this);
-
-      OneSignal.addEventListener('received', this.onReceived);
-      OneSignal.addEventListener('opened', this.onOpened);
-      OneSignal.addEventListener('ids', this.onIds);
-      OneSignal.addEventListener('emailSubscription', this.onEmailRegistrationChange);
-      OneSignal.addEventListener('inAppMessageClicked', this.onInAppMessageClicked);
-  }
-
-  componentWillUnmount() {
-      OneSignal.removeEventListener('received', this.onReceived);
-      OneSignal.removeEventListener('opened', this.onOpened);
-      OneSignal.removeEventListener('ids', this.onIds);
-      OneSignal.removeEventListener('emailSubscription', this.onEmailRegistrationChange);
-      OneSignal.removeEventListener('inAppMessageClicked', this.onInAppMessageClicked);
-  }
-
-  onEmailRegistrationChange(registration) {
-      console.log("onEmailRegistrationChange: ", registration);
-  }
-
-  onReceived(notification) {
-      console.log("Notification received: ", notification);
-
-      this.setState({jsonDebugText : "RECEIVED: \n" + JSON.stringify(notification, null, 2)})
-  }
-
-  onOpened(openResult) {
-    console.log('Message: ', openResult.notification.payload.body);
-    console.log('Data: ', openResult.notification.payload.additionalData);
-    console.log('isActive: ', openResult.notification.isAppInFocus);
-    console.log('openResult: ', openResult);
-
-    this.setState({jsonDebugText : "OPENED: \n" + JSON.stringify(openResult.notification, null, 2)})
-  }
-
-  onIds(device) {
-    // console.log('Device info: ', device.userId);
-    AsyncStorage.setItem('deviceOS', device.userId);    
-    // console.log(AsyncStorage.getItem('deviceOS'))
-  }
-
-  onInAppMessageClicked(actionResult) {
-    console.log('actionResult: ', actionResult);
-    this.setState({jsonDebugText : "CLICKED: \n" + JSON.stringify(actionResult, null, 2)})
-  }
-
-  render() {
-      return (
-          <View />
-      );
-  }
+        this.setState({
+            isSubscribed: deviceState.isSubscribed
+        });
+    }
+    render() {
+        return <View />;
+    }
 }
 
 const styles = StyleSheet.create({
-  scrollView: {
-      backgroundColor: '#F5FCFF'
-  },
-  container: {
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10,
-  },
-  instructions: {
-      textAlign: 'center',
-      color: '#333333',
-      marginBottom: 5,
-      marginHorizontal: 10
-  },
-  jsonDebugLabelText: {
-      textAlign: 'left',
-      color: '#333333',
-      marginBottom: 5,
-      marginHorizontal: 10
-  },
-  buttonContainer: {
-      flexDirection: 'row',
-      overflow: 'hidden',
-      borderRadius: 10,
-      marginVertical: 10,
-      marginHorizontal: 10,
-      backgroundColor: "#d45653"
-  },
-  button: {
-      color: '#000000',
-      flex: 1
-  },
-  imageStyle: {
-      height: 200,
-      width: 200,
-      marginTop: 20
-  },
-  textInput: {
-      marginHorizontal: 10,
-      height: 40
-  }
+    scrollView: {
+        backgroundColor: '#F5FCFF',
+    },
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
+        marginHorizontal: 10,
+    },
+    jsonDebugLabelText: {
+        textAlign: 'left',
+        color: '#333333',
+        marginBottom: 5,
+        marginHorizontal: 10,
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        overflow: 'hidden',
+        borderRadius: 10,
+        marginVertical: 10,
+        marginHorizontal: 10,
+        backgroundColor: '#d45653',
+    },
+    button: {
+        color: '#000000',
+        flex: 1,
+    },
+    imageStyle: {
+        height: 200,
+        width: 200,
+        marginTop: 20,
+    },
+    textInput: {
+        marginHorizontal: 10,
+        height: 40,
+    },
 });
