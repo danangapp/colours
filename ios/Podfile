@@ -31,3 +31,8 @@ target 'colours-tvOS' do
     # Pods for testing
   end
 end
+
+target 'OneSignalNotificationServiceExtension' do
+  #only copy below line
+  pod 'OneSignal'
+end
